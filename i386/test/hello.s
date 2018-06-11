@@ -1,14 +1,14 @@
-.data
+.section .rodata
 
+msg: .ascii "Hello World!\n"
+
+.equ msg_len, .-msg
 .equ sys_write, 4
 .equ sys_exit, 1
 .equ stdout, 1
 .equ kernel, 0x80
 
-msg: .ascii "Hello World!\n"
-.equ msg_len, .-msg
-
-.text
+.section .text
 
 .global _start
 
@@ -20,5 +20,5 @@ _start:
   int $kernel
 
   mov $sys_exit, %eax
-  mov $0, %ebx
+  xor %ebx, %ebx
   int $kernel

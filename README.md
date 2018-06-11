@@ -10,7 +10,7 @@
 ```console
 $ cd amd64/test
 $ vagrant up
-$ vagrant ssh -c "cd /vagrant && as -o hello.o hello.s && ld -o hello hello.o && ./hello"
+$ vagrant ssh -c "cd /vagrant && as -o hello.o hello.s && ld -o hello hello.o && strip -s hello && ./hello"
 Hello World!
 ```
 
