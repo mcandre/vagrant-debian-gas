@@ -1,24 +1,23 @@
-.global _start
-
 .data
 
+.equ sys_write, 1
+.equ sys_exit, 60
 .equ stdout, 1
-.equ sys_write, 4
-.equ sys_exit, 1
-.equ kernel, 0x80
 
-msg: .asciz "Hello World!\n"
-.equ len, .-msg
+msg: .ascii "Hello World!\n"
+.equ msg_len, .-msg
 
 .text
 
-_start:
-  mov $sys_write, %eax
-  mov $stdout, %ebx
-  mov $msg, %ecx
-  mov $len, %edx
-  int $kernel
+.global _start
 
-  mov $sys_exit, %eax
-  mov $0, %ebx
-  int $kernel
+_start:
+  mov $sys_write, %rax
+  mov $stdout, %rdi
+  mov $msg, %rsi
+  mov $msg_len, %rdx
+  syscall
+
+  mov $sys_exit, %rax
+  mov $0, %rdi
+  syscall
